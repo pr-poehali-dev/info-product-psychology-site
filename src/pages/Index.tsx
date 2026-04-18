@@ -74,7 +74,7 @@ const Index = () => {
                 onClick={handleBuy}
                 className="group flex items-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-medium transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-105 hover:shadow-xl"
               >
-                Get Access
+                Get Access — $40
                 <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
               </button>
               <div className="flex items-center gap-2 text-sm text-[#7a7060] pt-3 sm:pt-4">
@@ -152,7 +152,44 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Pricing CTA */}
+      <section className="max-w-6xl mx-auto px-6 pb-24">
+        <div className="bg-[#f5f2ea] border border-[#e0dbd0] rounded-3xl p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-10">
+          <div className="space-y-3 max-w-lg">
+            <span className="text-xs text-[#6b7a4a] tracking-widest uppercase font-medium">One-time payment</span>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-[#1a1a18] leading-tight">
+              Full access.<br />No subscriptions.
+            </h2>
+            <ul className="space-y-2 pt-2">
+              {['8 in-depth chapters', 'Real-world examples', 'Lifetime access', 'Instant delivery after payment'].map((item, i) => (
+                <li key={i} className="flex items-center gap-2 text-[#5a5850] text-sm">
+                  <Icon name="Check" size={15} className="text-[#6b7a4a] flex-shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex flex-col items-center gap-5 min-w-[220px]">
+            <div className="text-center">
+              <div className="font-display text-6xl font-light text-[#1a1a18]">$40</div>
+              <div className="text-sm text-[#7a7060] mt-1">one-time · crypto payment</div>
+            </div>
+            <button
+              onClick={handleBuy}
+              className="group w-full flex items-center justify-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-105 hover:shadow-xl"
+            >
+              Buy Now
+              <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
+            </button>
+            <p className="text-xs text-[#9a9080] text-center">
+              Wallet address copied automatically on click
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Dark CTA */}
       <section className="bg-[#1a1a18] text-[#fafaf7]">
         <div className="max-w-6xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="space-y-4 max-w-lg">
@@ -161,7 +198,7 @@ const Index = () => {
               <em className="not-italic text-[#a8b87a]">financial mindset?</em>
             </h2>
             <p className="text-[#a09880] text-base leading-relaxed">
-              Payment accepted in cryptocurrency. After payment, contact us to receive instant access.
+              Pay $40 in cryptocurrency. Your wallet address will be copied automatically — then send the payment and get instant access.
             </p>
             <div className="flex items-center gap-2 bg-[#2a2a20] rounded-xl px-4 py-3 text-sm font-mono text-[#c8c0a8] break-all select-all">
               <Icon name="Wallet" size={14} className="text-[#a8b87a] flex-shrink-0" />
@@ -170,11 +207,15 @@ const Index = () => {
           </div>
 
           <div className="flex flex-col gap-4 min-w-[220px]">
+            <div className="text-center mb-1">
+              <span className="font-display text-4xl font-light text-[#fafaf7]">$40</span>
+              <span className="text-[#6a6050] text-sm ml-2">one-time</span>
+            </div>
             <button
               onClick={handleBuy}
               className="group flex items-center justify-center gap-3 bg-[#fafaf7] text-[#1a1a18] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-[#a8b87a] hover:scale-105 hover:shadow-xl"
             >
-              Buy Now
+              Buy Now — $40
               <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
             </button>
             <p className="text-xs text-[#6a6050] text-center">
