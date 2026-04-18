@@ -5,33 +5,33 @@ const WALLET = '0xec6da57ce49fe14140050a012c94df329d2ec1d8';
 const advantages = [
   {
     icon: 'Brain',
-    title: 'Психология богатства',
-    desc: 'Разбираешь скрытые убеждения, которые блокируют твой доход. Меняешь мышление — меняется результат.',
+    title: 'Wealth Psychology',
+    desc: 'Uncover the hidden beliefs blocking your income. Change your mindset — change your results.',
   },
   {
     icon: 'TrendingUp',
-    title: 'Система заработка',
-    desc: 'Конкретные стратегии, которые работают в реальных условиях. Без воды и лишней теории.',
+    title: 'Income System',
+    desc: 'Concrete strategies that work in real-world conditions. No fluff, no filler — just what works.',
   },
   {
     icon: 'Zap',
-    title: 'Быстрый результат',
-    desc: 'Первые изменения в мышлении и доходе уже через 2 недели применения материала.',
+    title: 'Fast Results',
+    desc: 'See real shifts in your mindset and earnings within just 2 weeks of applying the material.',
   },
   {
     icon: 'Shield',
-    title: 'Проверено практикой',
-    desc: 'Методы прошли путь через реальный опыт. Не академические концепции, а живые инструменты.',
+    title: 'Battle-Tested',
+    desc: 'Methods built from real-world experience. Not academic theory — practical tools that deliver.',
   },
   {
     icon: 'BookOpen',
-    title: 'Доступно и глубоко',
-    desc: 'Сложные концепции объяснены простым языком. Читается легко, усваивается надолго.',
+    title: 'Clear & Deep',
+    desc: 'Complex concepts explained in plain language. Easy to read, built to stick for life.',
   },
   {
     icon: 'Infinity',
-    title: 'Навсегда твоё',
-    desc: 'Один раз получаешь — пользуешься всю жизнь. Возвращаешься к материалу когда нужно.',
+    title: 'Yours Forever',
+    desc: 'Buy once, keep forever. Return to the material whenever you need a breakthrough.',
   },
 ];
 
@@ -54,16 +54,16 @@ const Index = () => {
           <div className="space-y-8 animate-fade-up" style={{ animationDelay: '0.1s', opacity: 0 }}>
             <div className="inline-flex items-center gap-2 bg-[#f0ede4] border border-[#ddd8cc] rounded-full px-4 py-1.5 text-sm text-[#7a7060] tracking-wide">
               <span className="w-1.5 h-1.5 rounded-full bg-[#8a9a6a] inline-block" />
-              Инфопродукт · Психология и деньги
+              Info Product · Psychology & Wealth
             </div>
 
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light leading-[1.1] text-[#1a1a18]">
-              Деньги начинаются<br />
-              <em className="not-italic text-[#6b7a4a]">в голове</em>
+              Money starts<br />
+              <em className="not-italic text-[#6b7a4a]">in your mind</em>
             </h1>
 
             <p className="text-lg text-[#5a5850] leading-relaxed max-w-md">
-              Практическое руководство, которое объединяет психологию и финансы. Узнай, почему одни зарабатывают больше при тех же усилиях — и как оказаться среди них.
+              A practical guide that bridges psychology and finance. Discover why some people earn more with the same effort — and how to become one of them.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 items-start">
@@ -71,12 +71,12 @@ const Index = () => {
                 onClick={handleBuy}
                 className="group flex items-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-medium transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-105 hover:shadow-xl"
               >
-                Получить доступ
+                Get Access
                 <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
               </button>
               <div className="flex items-center gap-2 text-sm text-[#7a7060] pt-3 sm:pt-4">
                 <Icon name="Lock" size={14} />
-                Безопасная оплата криптовалютой
+                Secure crypto payment
               </div>
             </div>
           </div>
@@ -88,20 +88,20 @@ const Index = () => {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[#1a1a18]/10">
               <img
                 src="https://cdn.poehali.dev/projects/eadae3c9-50c3-4106-a21f-6b1ab6575ba6/files/282054cb-a816-42b3-b996-a32de4503204.jpg"
-                alt="Психология и деньги"
+                alt="Psychology and Money"
                 className="w-full object-cover aspect-[4/3]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a18]/20 to-transparent" />
             </div>
 
             <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-lg px-5 py-4 border border-[#eee]">
-              <div className="text-2xl font-display font-light text-[#1a1a18]">2 недели</div>
-              <div className="text-xs text-[#7a7060] mt-0.5">до первых результатов</div>
+              <div className="text-2xl font-display font-light text-[#1a1a18]">2 weeks</div>
+              <div className="text-xs text-[#7a7060] mt-0.5">to first results</div>
             </div>
 
             <div className="absolute -top-4 -right-4 bg-[#6b7a4a] text-white rounded-2xl shadow-lg px-5 py-3">
-              <div className="text-xs font-medium opacity-80">Доступ</div>
-              <div className="text-base font-semibold">Навсегда</div>
+              <div className="text-xs font-medium opacity-80">Access</div>
+              <div className="text-base font-semibold">Forever</div>
             </div>
           </div>
         </div>
@@ -116,10 +116,10 @@ const Index = () => {
       <section className="max-w-6xl mx-auto px-6 py-20">
         <div className="max-w-2xl mx-auto text-center space-y-6">
           <h2 className="font-display text-4xl md:text-5xl font-light text-[#1a1a18]">
-            Что внутри?
+            What's inside?
           </h2>
           <p className="text-[#5a5850] text-lg leading-relaxed">
-            Полное руководство по финансовому мышлению: от диагностики ограничивающих убеждений до построения системы устойчивого дохода. Психология, стратегия, практика — в одном материале.
+            A complete guide to financial thinking: from diagnosing limiting beliefs to building a system of sustainable income. Psychology, strategy, and practice — all in one place.
           </p>
         </div>
       </section>
@@ -127,7 +127,7 @@ const Index = () => {
       {/* Advantages */}
       <section className="max-w-6xl mx-auto px-6 pb-24">
         <div className="mb-12">
-          <span className="text-sm text-[#7a7060] tracking-widest uppercase font-medium">Преимущества</span>
+          <span className="text-sm text-[#7a7060] tracking-widest uppercase font-medium">Why it works</span>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {advantages.map((item, i) => (
@@ -154,11 +154,11 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="space-y-4 max-w-lg">
             <h2 className="font-display text-4xl md:text-5xl font-light leading-tight">
-              Готов изменить<br />
-              <em className="not-italic text-[#a8b87a]">финансовое мышление?</em>
+              Ready to rewire your<br />
+              <em className="not-italic text-[#a8b87a]">financial mindset?</em>
             </h2>
             <p className="text-[#a09880] text-base leading-relaxed">
-              Оплата принимается в криптовалюте. После оплаты напишите нам для получения доступа.
+              Payment accepted in cryptocurrency. After payment, contact us to receive instant access.
             </p>
             <div className="flex items-center gap-2 bg-[#2a2a20] rounded-xl px-4 py-3 text-sm font-mono text-[#c8c0a8] break-all select-all">
               <Icon name="Wallet" size={14} className="text-[#a8b87a] flex-shrink-0" />
@@ -171,11 +171,11 @@ const Index = () => {
               onClick={handleBuy}
               className="group flex items-center justify-center gap-3 bg-[#fafaf7] text-[#1a1a18] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-[#a8b87a] hover:scale-105 hover:shadow-xl"
             >
-              Купить сейчас
+              Buy Now
               <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
             </button>
             <p className="text-xs text-[#6a6050] text-center">
-              Адрес кошелька скопируется автоматически
+              Wallet address copied automatically
             </p>
           </div>
         </div>
@@ -183,8 +183,8 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="max-w-6xl mx-auto px-6 py-8 flex items-center justify-between text-sm text-[#9a9580]">
-        <span className="font-display text-base text-[#1a1a18]">Психология Денег</span>
-        <span>© 2026 · Все права защищены</span>
+        <span className="font-display text-base text-[#1a1a18]">Psychology of Money</span>
+        <span>© 2026 · All rights reserved</span>
       </footer>
     </main>
   );
