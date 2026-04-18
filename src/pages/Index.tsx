@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 
 const WALLET = '0xec6da57ce49fe14140050a012c94df329d2ec1d8';
@@ -36,9 +37,11 @@ const advantages = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
+
   const handleBuy = () => {
     navigator.clipboard?.writeText(WALLET);
-    window.open(`https://etherscan.io/address/${WALLET}`, '_blank');
+    navigate('/secrets');
   };
 
   return (
@@ -87,7 +90,7 @@ const Index = () => {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[#1a1a18]/10">
               <img
-                src="https://cdn.poehali.dev/projects/eadae3c9-50c3-4106-a21f-6b1ab6575ba6/files/282054cb-a816-42b3-b996-a32de4503204.jpg"
+                src="https://cdn.poehali.dev/projects/eadae3c9-50c3-4106-a21f-6b1ab6575ba6/files/63b06701-47d2-424a-996a-64c31eda34bd.jpg"
                 alt="Psychology and Money"
                 className="w-full object-cover aspect-[4/3]"
               />
