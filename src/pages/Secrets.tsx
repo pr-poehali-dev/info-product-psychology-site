@@ -190,38 +190,99 @@ const chapters = [
 
 const LockedScreen = () => {
   const navigate = useNavigate();
+  const [visible, setVisible] = useState(false);
+  const [shake, setShake] = useState(false);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setVisible(true), 80);
+    const t2 = setTimeout(() => setShake(true), 600);
+    const t3 = setTimeout(() => setShake(false), 900);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, []);
+
+  const items = [
+    '12 in-depth chapters',
+    'Real-world examples in every chapter',
+    'Actionable daily practices',
+    'Lifetime access — pay once, read forever',
+  ];
+
   return (
-    <main className="min-h-screen bg-[#FAFAF7] font-body text-[#1a1a18] flex flex-col items-center justify-center px-6">
-      <div className="max-w-md w-full text-center space-y-8">
-        <div className="w-20 h-20 rounded-3xl bg-[#1a1a18] flex items-center justify-center mx-auto">
-          <Icon name="Lock" size={36} className="text-[#fafaf7]" />
+    <main className="min-h-screen bg-[#FAFAF7] font-body text-[#1a1a18] flex flex-col items-center justify-center px-6 overflow-hidden">
+      {/* bg blobs */}
+      <div className="pointer-events-none fixed inset-0">
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#e8e4d9] opacity-40 blur-3xl" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] rounded-full bg-[#d4d8c8] opacity-30 blur-3xl" />
+      </div>
+
+      <div
+        className="relative max-w-md w-full text-center space-y-7 transition-all duration-700"
+        style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(28px)' }}
+      >
+        {/* Lock icon */}
+        <div className="flex justify-center">
+          <div
+            className="w-24 h-24 rounded-3xl bg-[#1a1a18] flex items-center justify-center shadow-2xl shadow-[#1a1a18]/20 transition-transform duration-100"
+            style={{ transform: shake ? 'rotate(-6deg) scale(1.08)' : 'rotate(0deg) scale(1)' }}
+          >
+            <Icon name="Lock" size={40} className="text-[#fafaf7]" />
+          </div>
         </div>
-        <div className="space-y-3">
+
+        {/* Text */}
+        <div
+          className="space-y-3 transition-all duration-700 delay-100"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(16px)' }}
+        >
           <h1 className="font-display text-4xl font-light text-[#1a1a18]">
             Access Restricted
           </h1>
           <p className="text-[#5a5850] text-base leading-relaxed">
-            This content is available only after payment. Complete your $20 purchase to unlock all 12 chapters with real examples and practices.
+            This content is available only after payment.<br />
+            Complete your <span className="font-semibold text-[#1a1a18]">$20</span> purchase to unlock all 12 chapters.
           </p>
         </div>
-        <div className="bg-[#f5f2ea] border border-[#e0dbd0] rounded-2xl p-6 space-y-3 text-left">
-          {['12 in-depth chapters', 'Real-world examples in every chapter', 'Actionable daily practices', 'Lifetime access — pay once, read forever'].map((item, i) => (
-            <div key={i} className="flex items-center gap-3 text-sm text-[#5a5850]">
-              <Icon name="Check" size={15} className="text-[#6b7a4a] flex-shrink-0" />
+
+        {/* Feature list */}
+        <div
+          className="bg-white border border-[#ebe8e0] rounded-2xl p-6 space-y-3 text-left shadow-sm transition-all duration-700 delay-200"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(16px)' }}
+        >
+          {items.map((item, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-3 text-sm text-[#5a5850] transition-all duration-500"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateX(0)' : 'translateX(-12px)',
+                transitionDelay: `${300 + i * 80}ms`
+              }}
+            >
+              <div className="w-5 h-5 rounded-full bg-[#e8f0d8] flex items-center justify-center flex-shrink-0">
+                <Icon name="Check" size={11} className="text-[#6b7a4a]" />
+              </div>
               {item}
             </div>
           ))}
         </div>
-        <button
-          onClick={() => navigate('/')}
-          className="group w-full flex items-center justify-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-105"
+
+        {/* CTA */}
+        <div
+          className="space-y-3 transition-all duration-700 delay-500"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(16px)' }}
         >
-          Go to payment — $20
-          <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
-        </button>
-        <p className="text-xs text-[#9a9080]">
-          Secure crypto payment · Instant access after confirmation
-        </p>
+          <button
+            onClick={() => navigate('/')}
+            className="group w-full flex items-center justify-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-[1.03] hover:shadow-xl active:scale-95"
+          >
+            <Icon name="CreditCard" size={18} />
+            Go to payment — $20
+            <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
+          </button>
+          <p className="text-xs text-[#9a9080]">
+            Secure crypto payment · Instant access after confirmation
+          </p>
+        </div>
       </div>
     </main>
   );
@@ -231,12 +292,14 @@ const Secrets = () => {
   const [searchParams] = useSearchParams();
   const [hasAccess, setHasAccess] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [freshPayment, setFreshPayment] = useState(false);
+  const [contentVisible, setContentVisible] = useState(false);
 
   useEffect(() => {
     const urlToken = searchParams.get('token');
     const storedToken = localStorage.getItem(ACCESS_KEY);
 
-    const verify = async (token: string) => {
+    const verify = async (token: string, isNew: boolean) => {
       try {
         const res = await fetch(VERIFY_URL, {
           method: 'POST',
@@ -246,7 +309,9 @@ const Secrets = () => {
         const data = await res.json();
         if (data.valid) {
           localStorage.setItem(ACCESS_KEY, token);
+          if (isNew) setFreshPayment(true);
           setHasAccess(true);
+          setTimeout(() => setContentVisible(true), 100);
         }
       } finally {
         setLoading(false);
@@ -254,9 +319,9 @@ const Secrets = () => {
     };
 
     if (urlToken) {
-      verify(urlToken);
+      verify(urlToken, true);
     } else if (storedToken) {
-      verify(storedToken);
+      verify(storedToken, false);
     } else {
       setLoading(false);
     }
@@ -264,8 +329,18 @@ const Secrets = () => {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#FAFAF7] flex items-center justify-center">
-        <div className="w-8 h-8 rounded-full border-2 border-[#6b7a4a] border-t-transparent animate-spin" />
+      <main className="min-h-screen bg-[#FAFAF7] flex flex-col items-center justify-center gap-6 font-body">
+        <div className="relative w-16 h-16">
+          <div className="absolute inset-0 rounded-full border-2 border-[#e8e4d9]" />
+          <div className="absolute inset-0 rounded-full border-2 border-[#6b7a4a] border-t-transparent animate-spin" />
+          <div className="absolute inset-[6px] rounded-full bg-[#f5f2ea] flex items-center justify-center">
+            <Icon name="Lock" size={18} className="text-[#6b7a4a]" />
+          </div>
+        </div>
+        <div className="text-center space-y-1">
+          <p className="text-sm font-medium text-[#1a1a18]">Verifying your access</p>
+          <p className="text-xs text-[#9a9080]">Just a moment...</p>
+        </div>
       </main>
     );
   }
@@ -275,7 +350,18 @@ const Secrets = () => {
   }
 
   return (
-    <main className="min-h-screen bg-[#FAFAF7] font-body text-[#1a1a18]">
+    <main
+      className="min-h-screen bg-[#FAFAF7] font-body text-[#1a1a18] transition-all duration-700"
+      style={{ opacity: contentVisible ? 1 : 0, transform: contentVisible ? 'translateY(0)' : 'translateY(20px)' }}
+    >
+      {/* Success banner — только при свежей оплате */}
+      {freshPayment && (
+        <div className="bg-[#6b7a4a] text-white text-sm font-medium py-3 px-6 text-center flex items-center justify-center gap-2 animate-fade-in">
+          <Icon name="CheckCircle" size={16} />
+          Payment confirmed — welcome! Your full access is unlocked.
+        </div>
+      )}
+
       {/* Header */}
       <header className="border-b border-[#ebe8e0] bg-white/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -332,7 +418,15 @@ const Secrets = () => {
       {/* Chapters */}
       <section className="max-w-4xl mx-auto px-6 py-16 space-y-20">
         {chapters.map((ch, i) => (
-          <article key={i} className="group">
+          <article
+            key={i}
+            className="group transition-all duration-700"
+            style={{
+              opacity: contentVisible ? 1 : 0,
+              transform: contentVisible ? 'translateY(0)' : 'translateY(24px)',
+              transitionDelay: `${150 + i * 60}ms`
+            }}
+          >
             <div className="flex items-start gap-6">
               <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#f5f2ea] group-hover:bg-[#e8f0d8] transition-colors duration-300 flex items-center justify-center mt-1">
                 <Icon name={ch.icon} fallback="Star" size={20} className="text-[#6b7a4a]" />
