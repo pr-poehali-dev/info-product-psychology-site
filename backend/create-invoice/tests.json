@@ -1,0 +1,13 @@
+{
+  "tests": [
+    {
+      "name": "Create invoice",
+      "method": "POST",
+      "path": "/",
+      "body": {"origin": "https://info-product-psychology-site.poehali.dev"},
+      "expectedStatus": 200,
+      "expectedBody": {"pay_url": "string"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}

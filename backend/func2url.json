@@ -1,4 +1,5 @@
 {
+  "create-invoice": "https://functions.poehali.dev/d2121a58-32e9-4ca4-82e3-56a7a24d6d37",
   "verify-token": "https://functions.poehali.dev/094839c6-22f9-4cea-991e-984f6c0b1f74",
   "generate-token": "https://functions.poehali.dev/7269b04a-3dcb-4c8f-b971-ba6bd7d4e442"
 }

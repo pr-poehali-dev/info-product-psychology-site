@@ -1,8 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 
 const WALLET = 'TQqLxdMJZ1h1Bcg1QyHumLjKFiqf6NTy6q';
-const GENERATE_TOKEN_URL = 'https://functions.poehali.dev/7269b04a-3dcb-4c8f-b971-ba6bd7d4e442';
+const CREATE_INVOICE_URL = 'https://functions.poehali.dev/d2121a58-32e9-4ca4-82e3-56a7a24d6d37';
 
 const advantages = [
   {
@@ -37,70 +37,29 @@ const advantages = [
   },
 ];
 
-declare global {
-  interface Window {
-    CryptoCloudWidget?: {
-      CreateInvoiceForm: (opts: object) => { mount: (selector: string) => void };
-    };
-  }
-}
-
 const Index = () => {
-  const handleBuy = () => {
-    navigator.clipboard?.writeText(WALLET);
-  };
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    const mount = (successUrl: string) => {
-      if (cancelled) return;
-      if (!window.CryptoCloudWidget) return;
-      const el = document.getElementById('cc-payment-form');
-      if (!el) return;
-      if (el.childElementCount > 0) return; // уже смонтирован
-      window.CryptoCloudWidget.CreateInvoiceForm({
-        shop_id: 'PVYbc2w7jDSWc7aJ',
-        amount: 20,
-        buttonText: 'Pay',
-        currency: 'USD',
-        locale: 'en',
-        template: 'dark',
-        emailRequired: true,
-        success_url: successUrl,
-      }).mount('#cc-payment-form');
-    };
-
-    const init = () => {
-      fetch(GENERATE_TOKEN_URL)
-        .then(r => r.json())
-        .then(data => {
-          const token = data.token || '';
-          const successUrl = window.location.origin + '/secrets?token=' + encodeURIComponent(token);
-          mount(successUrl);
-        })
-        .catch(() => {
-          mount(window.location.origin + '/secrets');
-        });
-    };
-
-    const waitForWidget = () => {
-      if (window.CryptoCloudWidget) {
-        init();
+  const handlePay = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(CREATE_INVOICE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ origin: window.location.origin }),
+      });
+      const data = await res.json();
+      if (data.pay_url) {
+        window.location.href = data.pay_url;
       } else {
-        const interval = setInterval(() => {
-          if (window.CryptoCloudWidget) {
-            clearInterval(interval);
-            if (!cancelled) init();
-          }
-        }, 200);
-        return () => clearInterval(interval);
+        alert('Payment service error. Please try again.');
       }
-    };
-
-    waitForWidget();
-    return () => { cancelled = true; };
-  }, []);
+    } catch {
+      alert('Connection error. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (
@@ -130,11 +89,12 @@ const Index = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 items-start">
               <button
-                onClick={handleBuy}
-                className="group flex items-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-medium transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-105 hover:shadow-xl"
+                onClick={handlePay}
+                disabled={loading}
+                className="group flex items-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-medium transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-105 hover:shadow-xl disabled:opacity-70 disabled:cursor-wait"
               >
-                Get Access — $20
-                <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
+                {loading ? 'Loading...' : 'Get Access — $20'}
+                {!loading && <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />}
               </button>
               <div className="flex items-center gap-2 text-sm text-[#7a7060] pt-3 sm:pt-4">
                 <Icon name="Lock" size={14} />
@@ -235,14 +195,15 @@ const Index = () => {
               <div className="text-sm text-[#7a7060] mt-1">one-time · crypto payment</div>
             </div>
             <button
-              onClick={handleBuy}
-              className="group w-full flex items-center justify-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-105 hover:shadow-xl"
+              onClick={handlePay}
+              disabled={loading}
+              className="group w-full flex items-center justify-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-105 hover:shadow-xl disabled:opacity-70 disabled:cursor-wait"
             >
-              Buy Now
-              <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
+              {loading ? 'Loading...' : 'Buy Now — $20'}
+              {!loading && <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />}
             </button>
             <p className="text-xs text-[#9a9080] text-center">
-              Wallet address copied automatically on click
+              Secure crypto payment via CryptoCloud
             </p>
           </div>
         </div>
@@ -270,7 +231,14 @@ const Index = () => {
               <span className="font-display text-4xl font-light text-[#fafaf7]">$20</span>
               <span className="text-[#6a6050] text-sm ml-2">one-time</span>
             </div>
-            <div id="cc-payment-form" />
+            <button
+              onClick={handlePay}
+              disabled={loading}
+              className="group flex items-center justify-center gap-3 bg-[#fafaf7] text-[#1a1a18] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-[#a8b87a] hover:scale-105 hover:shadow-xl disabled:opacity-70 disabled:cursor-wait"
+            >
+              {loading ? 'Loading...' : 'Pay $20 Now'}
+              {!loading && <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />}
+            </button>
             <p className="text-xs text-[#6a6050] text-center">
               All major cryptocurrencies accepted
             </p>
