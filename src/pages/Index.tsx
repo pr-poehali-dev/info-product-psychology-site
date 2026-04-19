@@ -46,18 +46,19 @@ declare global {
 }
 
 const Index = () => {
-  const widgetMounted = useRef(false);
-
   const handleBuy = () => {
     navigator.clipboard?.writeText(WALLET);
   };
 
   useEffect(() => {
-    if (widgetMounted.current) return;
+    let cancelled = false;
 
     const mount = (successUrl: string) => {
-      const el = document.querySelector('.cc-payment-form');
-      if (!el || !window.CryptoCloudWidget) return false;
+      if (cancelled) return;
+      if (!window.CryptoCloudWidget) return;
+      const el = document.getElementById('cc-payment-form');
+      if (!el) return;
+      if (el.childElementCount > 0) return; // уже смонтирован
       window.CryptoCloudWidget.CreateInvoiceForm({
         shop_id: 'PVYbc2w7jDSWc7aJ',
         amount: 20,
@@ -67,9 +68,7 @@ const Index = () => {
         template: 'dark',
         emailRequired: true,
         success_url: successUrl,
-      }).mount('.cc-payment-form');
-      widgetMounted.current = true;
-      return true;
+      }).mount('#cc-payment-form');
     };
 
     const init = () => {
@@ -78,27 +77,29 @@ const Index = () => {
         .then(data => {
           const token = data.token || '';
           const successUrl = window.location.origin + '/secrets?token=' + encodeURIComponent(token);
-          const ok = mount(successUrl);
-          if (!ok) setTimeout(() => mount(successUrl), 500);
+          mount(successUrl);
         })
         .catch(() => {
-          const successUrl = window.location.origin + '/secrets';
-          const ok = mount(successUrl);
-          if (!ok) setTimeout(() => mount(successUrl), 500);
+          mount(window.location.origin + '/secrets');
         });
     };
 
-    if (window.CryptoCloudWidget) {
-      init();
-    } else {
-      const interval = setInterval(() => {
-        if (window.CryptoCloudWidget) {
-          clearInterval(interval);
-          init();
-        }
-      }, 200);
-      return () => clearInterval(interval);
-    }
+    const waitForWidget = () => {
+      if (window.CryptoCloudWidget) {
+        init();
+      } else {
+        const interval = setInterval(() => {
+          if (window.CryptoCloudWidget) {
+            clearInterval(interval);
+            if (!cancelled) init();
+          }
+        }, 200);
+        return () => clearInterval(interval);
+      }
+    };
+
+    waitForWidget();
+    return () => { cancelled = true; };
   }, []);
 
 
@@ -269,7 +270,7 @@ const Index = () => {
               <span className="font-display text-4xl font-light text-[#fafaf7]">$20</span>
               <span className="text-[#6a6050] text-sm ml-2">one-time</span>
             </div>
-            <div className="cc-payment-form" />
+            <div id="cc-payment-form" />
             <p className="text-xs text-[#6a6050] text-center">
               All major cryptocurrencies accepted
             </p>
