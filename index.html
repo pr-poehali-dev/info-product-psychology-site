@@ -44,7 +44,8 @@
         currency: "USD",
         locale: "en",
         template: "dark",
-        emailRequired: true
+        emailRequired: true,
+        success_url: window.location.origin + "/secrets?paid=true"
       }).mount('.cc-payment-form');
     }
   });

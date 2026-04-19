@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 
 const WALLET = 'TQqLxdMJZ1h1Bcg1QyHumLjKFiqf6NTy6q';
@@ -37,11 +36,8 @@ const advantages = [
 ];
 
 const Index = () => {
-  const navigate = useNavigate();
-
   const handleBuy = () => {
     navigator.clipboard?.writeText(WALLET);
-    navigate('/secrets');
   };
 
   return (

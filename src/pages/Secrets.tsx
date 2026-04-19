@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
+
+const ACCESS_KEY = 'pom_paid_access';
 
 const chapters = [
   {
@@ -183,7 +187,76 @@ const chapters = [
   },
 ];
 
+const LockedScreen = () => {
+  const navigate = useNavigate();
+  return (
+    <main className="min-h-screen bg-[#FAFAF7] font-body text-[#1a1a18] flex flex-col items-center justify-center px-6">
+      <div className="max-w-md w-full text-center space-y-8">
+        <div className="w-20 h-20 rounded-3xl bg-[#1a1a18] flex items-center justify-center mx-auto">
+          <Icon name="Lock" size={36} className="text-[#fafaf7]" />
+        </div>
+        <div className="space-y-3">
+          <h1 className="font-display text-4xl font-light text-[#1a1a18]">
+            Access Restricted
+          </h1>
+          <p className="text-[#5a5850] text-base leading-relaxed">
+            This content is available only after payment. Complete your $20 purchase to unlock all 12 chapters with real examples and practices.
+          </p>
+        </div>
+        <div className="bg-[#f5f2ea] border border-[#e0dbd0] rounded-2xl p-6 space-y-3 text-left">
+          {['12 in-depth chapters', 'Real-world examples in every chapter', 'Actionable daily practices', 'Lifetime access — pay once, read forever'].map((item, i) => (
+            <div key={i} className="flex items-center gap-3 text-sm text-[#5a5850]">
+              <Icon name="Check" size={15} className="text-[#6b7a4a] flex-shrink-0" />
+              {item}
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={() => navigate('/')}
+          className="group w-full flex items-center justify-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-105"
+        >
+          Go to payment — $20
+          <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
+        </button>
+        <p className="text-xs text-[#9a9080]">
+          Secure crypto payment · Instant access after confirmation
+        </p>
+      </div>
+    </main>
+  );
+};
+
 const Secrets = () => {
+  const [searchParams] = useSearchParams();
+  const [hasAccess, setHasAccess] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const paid = searchParams.get('paid');
+    const status = searchParams.get('status');
+    const stored = localStorage.getItem(ACCESS_KEY);
+
+    if (paid === 'true' || status === 'success') {
+      localStorage.setItem(ACCESS_KEY, 'true');
+      setHasAccess(true);
+    } else if (stored === 'true') {
+      setHasAccess(true);
+    }
+    setLoading(false);
+  }, [searchParams]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-[#FAFAF7] flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-[#6b7a4a] border-t-transparent animate-spin" />
+      </main>
+    );
+  }
+
+  if (!hasAccess) {
+    return <LockedScreen />;
+  }
+
   return (
     <main className="min-h-screen bg-[#FAFAF7] font-body text-[#1a1a18]">
       {/* Header */}
