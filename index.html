@@ -36,18 +36,37 @@
 <script defer src="https://cdn.cryptocloud.plus/widget/v1/widget.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    if (window.CryptoCloudWidget) {
-      window.CryptoCloudWidget.CreateInvoiceForm({
-        shop_id: "PVYbc2w7jDSWc7aJ",
-        amount: 20,
-        buttonText: "Pay",
-        currency: "USD",
-        locale: "en",
-        template: "dark",
-        emailRequired: true,
-        success_url: window.location.origin + "/secrets?paid=true"
-      }).mount('.cc-payment-form');
-    }
+    fetch("https://functions.poehali.dev/7269b04a-3dcb-4c8f-b971-ba6bd7d4e442")
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var token = data.token || '';
+        var successUrl = window.location.origin + "/secrets?token=" + encodeURIComponent(token);
+        if (window.CryptoCloudWidget) {
+          window.CryptoCloudWidget.CreateInvoiceForm({
+            shop_id: "PVYbc2w7jDSWc7aJ",
+            amount: 20,
+            buttonText: "Pay",
+            currency: "USD",
+            locale: "en",
+            template: "dark",
+            emailRequired: true,
+            success_url: successUrl
+          }).mount('.cc-payment-form');
+        }
+      })
+      .catch(function() {
+        if (window.CryptoCloudWidget) {
+          window.CryptoCloudWidget.CreateInvoiceForm({
+            shop_id: "PVYbc2w7jDSWc7aJ",
+            amount: 20,
+            buttonText: "Pay",
+            currency: "USD",
+            locale: "en",
+            template: "dark",
+            emailRequired: true
+          }).mount('.cc-payment-form');
+        }
+      });
   });
 </script>
 

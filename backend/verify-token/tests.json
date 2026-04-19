@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "Reject invalid token",
+      "method": "POST",
+      "path": "/",
+      "body": {"token": "fake.token"},
+      "expectedStatus": 200,
+      "expectedBody": {"valid": false},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Reject empty token",
+      "method": "POST",
+      "path": "/",
+      "body": {"token": ""},
+      "expectedStatus": 200,
+      "expectedBody": {"valid": false},
+      "bodyMatcher": "partial"
+    }
+  ]
+}

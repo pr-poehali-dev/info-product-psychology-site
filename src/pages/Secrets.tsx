@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 
-const ACCESS_KEY = 'pom_paid_access';
+const ACCESS_KEY = 'pom_access_token';
+const VERIFY_URL = 'https://functions.poehali.dev/094839c6-22f9-4cea-991e-984f6c0b1f74';
 
 const chapters = [
   {
@@ -232,17 +233,33 @@ const Secrets = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const paid = searchParams.get('paid');
-    const status = searchParams.get('status');
-    const stored = localStorage.getItem(ACCESS_KEY);
+    const urlToken = searchParams.get('token');
+    const storedToken = localStorage.getItem(ACCESS_KEY);
 
-    if (paid === 'true' || status === 'success') {
-      localStorage.setItem(ACCESS_KEY, 'true');
-      setHasAccess(true);
-    } else if (stored === 'true') {
-      setHasAccess(true);
+    const verify = async (token: string) => {
+      try {
+        const res = await fetch(VERIFY_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token })
+        });
+        const data = await res.json();
+        if (data.valid) {
+          localStorage.setItem(ACCESS_KEY, token);
+          setHasAccess(true);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (urlToken) {
+      verify(urlToken);
+    } else if (storedToken) {
+      verify(storedToken);
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, [searchParams]);
 
   if (loading) {
