@@ -33,6 +33,22 @@
 <body>
 <div id="root"></div>
 <script type="module" src="/src/main.tsx"></script>
+<script defer src="https://cdn.cryptocloud.plus/widget/v1/widget.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (window.CryptoCloudWidget) {
+      window.CryptoCloudWidget.CreateInvoiceForm({
+        shop_id: "PVYbc2w7jDSWc7aJ",
+        amount: 20,
+        buttonText: "Pay",
+        currency: "USD",
+        locale: "en",
+        template: "dark",
+        emailRequired: true
+      }).mount('.cc-payment-form');
+    }
+  });
+</script>
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">

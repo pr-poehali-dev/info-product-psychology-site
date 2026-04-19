@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 
-const WALLET = '0xec6da57ce49fe14140050a012c94df329d2ec1d8';
+const WALLET = 'TQqLxdMJZ1h1Bcg1QyHumLjKFiqf6NTy6q';
 
 const advantages = [
   {
@@ -74,7 +74,7 @@ const Index = () => {
                 onClick={handleBuy}
                 className="group flex items-center gap-3 bg-[#1a1a18] text-[#fafaf7] px-8 py-4 rounded-full text-base font-medium transition-all duration-300 hover:bg-[#3a3a2a] hover:scale-105 hover:shadow-xl"
               >
-                Get Access — $40
+                Get Access — $20
                 <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
               </button>
               <div className="flex items-center gap-2 text-sm text-[#7a7060] pt-3 sm:pt-4">
@@ -172,7 +172,7 @@ const Index = () => {
 
           <div className="flex flex-col items-center gap-5 min-w-[220px]">
             <div className="text-center">
-              <div className="font-display text-6xl font-light text-[#1a1a18]">$40</div>
+              <div className="font-display text-6xl font-light text-[#1a1a18]">$20</div>
               <div className="text-sm text-[#7a7060] mt-1">one-time · crypto payment</div>
             </div>
             <button
@@ -198,7 +198,7 @@ const Index = () => {
               <em className="not-italic text-[#a8b87a]">financial mindset?</em>
             </h2>
             <p className="text-[#a09880] text-base leading-relaxed">
-              Pay $40 in cryptocurrency. Your wallet address will be copied automatically — then send the payment and get instant access.
+              Pay $20 once — get lifetime access instantly. Secure crypto payment powered by CryptoCloud.
             </p>
             <div className="flex items-center gap-2 bg-[#2a2a20] rounded-xl px-4 py-3 text-sm font-mono text-[#c8c0a8] break-all select-all">
               <Icon name="Wallet" size={14} className="text-[#a8b87a] flex-shrink-0" />
@@ -206,20 +206,14 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 min-w-[220px]">
+          <div className="flex flex-col gap-4 min-w-[260px] w-full md:w-auto">
             <div className="text-center mb-1">
-              <span className="font-display text-4xl font-light text-[#fafaf7]">$40</span>
+              <span className="font-display text-4xl font-light text-[#fafaf7]">$20</span>
               <span className="text-[#6a6050] text-sm ml-2">one-time</span>
             </div>
-            <button
-              onClick={handleBuy}
-              className="group flex items-center justify-center gap-3 bg-[#fafaf7] text-[#1a1a18] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-[#a8b87a] hover:scale-105 hover:shadow-xl"
-            >
-              Buy Now — $40
-              <Icon name="ArrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
-            </button>
+            <div className="cc-payment-form" />
             <p className="text-xs text-[#6a6050] text-center">
-              Wallet address copied automatically
+              All major cryptocurrencies accepted
             </p>
           </div>
         </div>

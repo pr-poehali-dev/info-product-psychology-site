@@ -107,6 +107,66 @@ const chapters = [
     practice: 'Spend 20 minutes writing your wealth statement using the template above. Reduce it to one sentence. Post it somewhere you see every single morning. Read it with intention, not routine. That difference — between reading and meaning it — is everything.',
   },
   {
+    icon: 'Repeat',
+    tag: 'Habits',
+    title: 'The Compound Effect of Daily Habits',
+    content: [
+      'Most people overestimate what a single big decision can do and underestimate what 365 small consistent actions can achieve. The compound effect is not a financial concept — it is a life concept. It applies to your health, your knowledge, your relationships, and your bank account equally.',
+      'A 1% improvement every day compounds to 37x growth over a year. A 1% decline every day leaves you with 3% of where you started. The math is relentless. This means your daily habits are not small things — they are the entire ballgame played slowly enough that most people don\'t notice until years have passed.',
+      'The key is to design your environment, not just your willpower. Willpower is a depleting resource — it runs on glucose and gets tired. Environment is always on. The person who puts their running shoes by the door sleeps beats the person who "tries harder" every single time.',
+    ],
+    example: {
+      label: 'Real Example',
+      text: 'Kevin wanted to read more books. His "try harder" approach failed for years. Then he removed his TV remote and put a book on his couch cushion. Reading went from 0 to 30 books a year — not because his willpower improved, but because the environment made the default behavior the right one. Three years later he credits this habit with two promotions and one business idea he actually launched.',
+    },
+    practice: 'Identify one habit you\'ve been "trying" to build for more than 6 months. Now redesign your environment: remove friction from the good behavior and add friction to the competing bad one. Do not rely on motivation. Motivation is weather. Environment is infrastructure.',
+  },
+  {
+    icon: 'DollarSign',
+    tag: 'Spending',
+    title: 'The Psychology of Smart Spending',
+    content: [
+      'Most financial advice focuses on earning more. Very few people talk honestly about the psychology of spending — because spending is emotional, tribal, and deeply tied to identity. You don\'t buy a luxury watch to tell time. You buy it to tell a story about who you are. Understanding this is not judgment — it\'s power.',
+      'There are two types of spending: consumptive (value disappears when consumed) and investment (value grows over time). Most people\'s spending is 90% consumptive and 10% investment. High financial performers flip this ratio intentionally — not by being cheap, but by being deliberate. They spend lavishly on what genuinely matters and ruthlessly cut what doesn\'t.',
+      'The most dangerous spending trap is "lifestyle inflation" — every raise gets absorbed by a slightly larger lifestyle. Income goes up, spending goes up, savings stay flat, anxiety stays high. Breaking this loop requires one rule: never let lifestyle grow faster than savings rate.',
+    ],
+    example: {
+      label: 'Real Example',
+      text: 'Nina earned $80k and felt broke. An audit revealed $1,400/month on subscriptions, impulse fashion, and food delivery — things she never consciously chose. She cut $900 of that, redirected it into investments, and increased her daily quality of life by spending the remaining $500 on two things she genuinely loved: cooking classes and weekend hikes. Same income, completely different financial trajectory.',
+    },
+    practice: 'Pull up last month\'s bank statement and categorize every transaction as "consumptive" or "investment." Don\'t judge — just see. Then circle three consumptive items you would not miss if they disappeared tomorrow. Redirect that money to one investment — even $50/month started at 25 is worth more than $500/month started at 45.',
+  },
+  {
+    icon: 'Sunrise',
+    tag: 'Morning',
+    title: 'How You Start the Day Changes Everything',
+    content: [
+      'The first 60 minutes of your day set the neurological tone for everything that follows. Most people hand those 60 minutes to their phone — specifically to other people\'s agendas, anxieties, and content. This is the single most common productivity and mindset mistake high-potential people make.',
+      'A morning routine is not about waking up at 4am or doing an hour of meditation. It\'s about owning the first block of your day before the world gets to it. Even 15 intentional minutes — no phone, no news, just breathing + one clear intention for the day — creates measurable shifts in cortisol levels and decision quality throughout the day.',
+      'The most effective morning routines share one trait: they start with input to the inner world before engaging the outer world. Journal, move, breathe, read — anything that is yours before the world\'s noise begins. Billionaires, athletes, and consistently high performers across fields protect this window obsessively.',
+    ],
+    example: {
+      label: 'Real Example',
+      text: 'Chris was a sales manager who described himself as "reactive all day." He added one change: phone face-down for the first 20 minutes after waking, replaced with 10 minutes of walking outside and writing one sentence: "Today I will focus on ___." His close rate in sales increased 18% over 90 days. His team assumed he\'d changed his pitch. He\'d changed his morning.',
+    },
+    practice: 'For 14 days, do not look at your phone for the first 20 minutes after waking. Replace that time with any one of: a short walk, 5 deep breaths by a window, writing one intention, or reading 10 pages of a non-fiction book. Track your mood and focus at 2pm each day. The pattern will surprise you.',
+  },
+  {
+    icon: 'MessageSquare',
+    tag: 'Communication',
+    title: 'The Language of Influence and Negotiation',
+    content: [
+      'Your income is largely determined by your ability to communicate value. Not your actual value — your communicated value. Two people with identical skills can earn vastly different amounts based on how they speak about their work, negotiate their worth, and position their offers. Communication is a financial skill.',
+      'The most powerful word in negotiation is silence. Most people — especially high-achievers who want to seem helpful — fill silences immediately. After you state your price or your ask, stop talking. Let the pause work. The first person to speak after a silence often concedes. This one technique has been worth tens of thousands of dollars to people who practice it.',
+      'Learn to separate the emotion from the negotiation. Preparing your walk-away number before any negotiation removes in-the-moment anxiety that leads to bad deals. Know your floor. Know your ideal outcome. Know your first offer. Walk in with a plan, not a hope.',
+    ],
+    example: {
+      label: 'Real Example',
+      text: 'Priya had been at her job for 3 years without a raise. She prepared a one-page document: market rate data, her measurable contributions, and her request for a 22% increase. In the meeting she presented it, stated her number, and went quiet. Her manager responded after 8 seconds of silence: "Let me see what I can do." Two weeks later: 18% increase. She had never negotiated in her life before that moment.',
+    },
+    practice: 'Practice the silence technique in low-stakes situations this week. Ask for something — a discount, an upgrade, a favor — state your request clearly, and then say nothing. Count silently to ten. Notice the discomfort. Notice that the other person almost always responds. You\'re building the muscle you\'ll use when the stakes are real.',
+  },
+  {
     icon: 'Users',
     tag: 'Network',
     title: 'Your Network Is Your Net Worth',
