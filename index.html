@@ -33,41 +33,39 @@
 <body>
 <div id="root"></div>
 <script type="module" src="/src/main.tsx"></script>
-<script defer src="https://cdn.cryptocloud.plus/widget/v1/widget.js"></script>
+<script src="https://cdn.cryptocloud.plus/widget/v1/widget.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  function mountCryptoWidget(successUrl) {
+    window.CryptoCloudWidget.CreateInvoiceForm({
+      shop_id: "PVYbc2w7jDSWc7aJ",
+      amount: 20,
+      buttonText: "Pay",
+      currency: "USD",
+      locale: "en",
+      template: "dark",
+      emailRequired: true,
+      success_url: successUrl || (window.location.origin + "/secrets")
+    }).mount('.cc-payment-form');
+  }
+
+  function initWidget() {
+    if (!window.CryptoCloudWidget) {
+      setTimeout(initWidget, 200);
+      return;
+    }
     fetch("https://functions.poehali.dev/7269b04a-3dcb-4c8f-b971-ba6bd7d4e442")
       .then(function(r) { return r.json(); })
       .then(function(data) {
         var token = data.token || '';
         var successUrl = window.location.origin + "/secrets?token=" + encodeURIComponent(token);
-        if (window.CryptoCloudWidget) {
-          window.CryptoCloudWidget.CreateInvoiceForm({
-            shop_id: "PVYbc2w7jDSWc7aJ",
-            amount: 20,
-            buttonText: "Pay",
-            currency: "USD",
-            locale: "en",
-            template: "dark",
-            emailRequired: true,
-            success_url: successUrl
-          }).mount('.cc-payment-form');
-        }
+        mountCryptoWidget(successUrl);
       })
       .catch(function() {
-        if (window.CryptoCloudWidget) {
-          window.CryptoCloudWidget.CreateInvoiceForm({
-            shop_id: "PVYbc2w7jDSWc7aJ",
-            amount: 20,
-            buttonText: "Pay",
-            currency: "USD",
-            locale: "en",
-            template: "dark",
-            emailRequired: true
-          }).mount('.cc-payment-form');
-        }
+        mountCryptoWidget();
       });
-  });
+  }
+
+  window.addEventListener('load', initWidget);
 </script>
 
 <!-- Yandex.Metrika counter -->
