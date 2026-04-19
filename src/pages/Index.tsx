@@ -1,6 +1,8 @@
+import { useEffect, useRef } from 'react';
 import Icon from '@/components/ui/icon';
 
 const WALLET = 'TQqLxdMJZ1h1Bcg1QyHumLjKFiqf6NTy6q';
+const GENERATE_TOKEN_URL = 'https://functions.poehali.dev/7269b04a-3dcb-4c8f-b971-ba6bd7d4e442';
 
 const advantages = [
   {
@@ -35,10 +37,70 @@ const advantages = [
   },
 ];
 
+declare global {
+  interface Window {
+    CryptoCloudWidget?: {
+      CreateInvoiceForm: (opts: object) => { mount: (selector: string) => void };
+    };
+  }
+}
+
 const Index = () => {
+  const widgetMounted = useRef(false);
+
   const handleBuy = () => {
     navigator.clipboard?.writeText(WALLET);
   };
+
+  useEffect(() => {
+    if (widgetMounted.current) return;
+
+    const mount = (successUrl: string) => {
+      const el = document.querySelector('.cc-payment-form');
+      if (!el || !window.CryptoCloudWidget) return false;
+      window.CryptoCloudWidget.CreateInvoiceForm({
+        shop_id: 'PVYbc2w7jDSWc7aJ',
+        amount: 20,
+        buttonText: 'Pay',
+        currency: 'USD',
+        locale: 'en',
+        template: 'dark',
+        emailRequired: true,
+        success_url: successUrl,
+      }).mount('.cc-payment-form');
+      widgetMounted.current = true;
+      return true;
+    };
+
+    const init = () => {
+      fetch(GENERATE_TOKEN_URL)
+        .then(r => r.json())
+        .then(data => {
+          const token = data.token || '';
+          const successUrl = window.location.origin + '/secrets?token=' + encodeURIComponent(token);
+          const ok = mount(successUrl);
+          if (!ok) setTimeout(() => mount(successUrl), 500);
+        })
+        .catch(() => {
+          const successUrl = window.location.origin + '/secrets';
+          const ok = mount(successUrl);
+          if (!ok) setTimeout(() => mount(successUrl), 500);
+        });
+    };
+
+    if (window.CryptoCloudWidget) {
+      init();
+    } else {
+      const interval = setInterval(() => {
+        if (window.CryptoCloudWidget) {
+          clearInterval(interval);
+          init();
+        }
+      }, 200);
+      return () => clearInterval(interval);
+    }
+  }, []);
+
 
   return (
     <main className="min-h-screen bg-[#FAFAF7] font-body text-[#1a1a18]">
